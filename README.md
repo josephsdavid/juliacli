@@ -25,7 +25,7 @@ quick demo, generates a project, adds things to project
 ```bash 
 juliacli -h
 juliacli pkg -h
-juliacli formatter -j
+juliacli formatter -h
 juliacli server -h
 juliacli pkg generate JuliacliDemo
 cd JuliacliDemo
