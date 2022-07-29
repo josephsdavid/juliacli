@@ -16,6 +16,10 @@
     quick demo, generates a project, adds things to project
 
     @code bash 
+    juliacli -h
+    juliacli pkg -h
+    juliacli formatter -j
+    juliacli server -h
     juliacli pkg generate JuliacliDemo
     cd JuliacliDemo
     juliacli pkg status

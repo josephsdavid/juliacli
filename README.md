@@ -23,6 +23,10 @@ As long as `~/.julia/bin/` is in your $PATH, everything should be good to go!
 quick demo, generates a project, adds things to project
 
 ```bash 
+juliacli -h
+juliacli pkg -h
+juliacli formatter -j
+juliacli server -h
 juliacli pkg generate JuliacliDemo
 cd JuliacliDemo
 juliacli pkg status
