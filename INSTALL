@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+julia --project=. -e 'using Pkg; Pkg.build()'
