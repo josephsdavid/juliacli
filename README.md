@@ -42,6 +42,11 @@ juliacli pkg status
 To set up the LSP to use the wrapped and compiled LanguageServer, try somehting like:
 ```lua
 local nvim_lsp = require"lspconfig"
+
+-- on attach defined somewhere 
+-- make capabilities defined somewhere?
+-- this is just a little snippet :)
+
 local servers = {
     julials = {
         cmd = {"juliacli", "server"},
