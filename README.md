@@ -16,26 +16,6 @@ As long as `~/.julia/bin/` is in your $PATH, everything should be good to go!
 ## Demos
 
 
-
-### Pkg Wrapper
-
-
-quick demo, generates a project, adds things to project
-
-```bash 
-juliacli -h
-juliacli pkg -h
-juliacli formatter -h
-juliacli server -h
-juliacli pkg generate JuliacliDemo
-cd JuliacliDemo
-juliacli pkg status
-juliacli pkg add JSON
-juliacli pkg add DataStructures
-juliacli pkg status
-```
-
-
 ### Easy LSP setup in Neovim
 
 
@@ -77,3 +57,22 @@ for lsp, setup in pairs(servers) do
 end
 
 ```
+
+### Other things you can do
+
+
+quick demo, generates a project, adds things to project
+
+```bash 
+juliacli -h
+juliacli pkg -h
+juliacli formatter -h
+juliacli server -h
+juliacli pkg generate JuliacliDemo
+cd JuliacliDemo
+juliacli pkg status
+juliacli pkg add JSON
+juliacli pkg add DataStructures
+juliacli pkg status
+```
+
