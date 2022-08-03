@@ -53,7 +53,8 @@ local servers = {
 for lsp, setup in pairs(servers) do
     setup.on_attach = on_attach
     setup.capabilities = make_capabilities()
-    nvim_lsp[lsp].setup(setup) # this is the line you care about, sets up julials to run from the `juliacli server` command
+    -- this is the line you care about, sets up julials to run from the `juliacli server` command
+    nvim_lsp[lsp].setup(setup) 
 end
 
 ```
