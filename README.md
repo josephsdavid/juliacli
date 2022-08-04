@@ -6,10 +6,11 @@ Mostly for personal use. Wraps `Pkg`, `LanguageServer.jl`, and `JuliaFormatter.j
 ## Installation
 
 
-1. `git clone git@github.com:josephsdavid/juliacli.git`
-2. `cd juliacli`
-3. `./INSTALL`
-
+```bash
+git clone git@github.com:josephsdavid/juliacli.git
+cd juliacli
+./INSTALL
+```
 As long as `~/.julia/bin/` is in your $PATH, everything should be good to go!
 
 
