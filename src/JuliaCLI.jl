@@ -87,7 +87,17 @@ function err(message)
     @error message
 end
 
-@cast function formatter(path=nothing)
+function dir_switch_fun(path, dirfun, pfun)
+    if isdir(path)
+        return dirfun(path)
+    elseif isfile(path)
+        return pfun(path)
+    else
+        error("$(path) not found!")
+    end
+end
+
+@cast function formatter(path::Union{AbstractString, Nothing}=nothing)
     # TODO: Visual mode version (which takes a string and formats it)
     if isnothing(path)
         path = let
@@ -96,15 +106,7 @@ end
         end
         return formatter(path)
     end
-    if isdir(path)
-        format(path)
-    elseif isfile(path)
-        format_file(path)
-    else
-        @error "$(path) not found!"
-    end
-    isdir(path) ? format(path) :
-    isfile(path) ? format_file(path) : err("Not a file!"):err("Not a file!")
+    return dir_switch_fun(path, format, format_file)
 end
 
 # NOTE: Find a better way to handle this
