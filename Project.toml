@@ -12,9 +12,9 @@ SymbolServer = "cf896787-08d5-524d-9de7-132aaa0cb996"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [compat]
-Comonicon = "~0.13.0"
-LanguageServer = "~4.4.0"
-Revise = "~3.5.0"
-SymbolServer = "~7.3.0"
+Comonicon = "~0.12"
+LanguageServer = "~4.3"
+Revise = "~3.4"
+SymbolServer = "~7.2"
 
 
