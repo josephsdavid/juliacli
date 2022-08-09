@@ -1,7 +1,6 @@
 module JuliaCLI
 using Pkg: depots1
 using LanguageServer, SymbolServer
-using JuliaFormatter
 using Comonicon
 
 # shamelessly borrowed from https://github.com/ExpandingMan/LSPNeovim.jl, which is no longer maintained
@@ -81,32 +80,6 @@ end
 
 @cast function server(; download::Bool=false)
     return runserver(; download)
-end
-
-function err(message)
-    @error message
-end
-
-function dir_switch_fun(path, dirfun, pfun)
-    if isdir(path)
-        return dirfun(path)
-    elseif isfile(path)
-        return pfun(path)
-    else
-        error("$(path) not found!")
-    end
-end
-
-@cast function formatter(path::Union{AbstractString, Nothing}=nothing)
-    # TODO: Visual mode version (which takes a string and formats it)
-    if isnothing(path)
-        path = let
-            proj = resolve_julia_project()
-            isfile(proj) ? dirname(proj) : proj
-        end
-        return formatter(path)
-    end
-    return dir_switch_fun(path, format, format_file)
 end
 
 # NOTE: Find a better way to handle this
