@@ -6,3 +6,6 @@ quiet = false
 optimize = 2
 
 [sysimg]
+
+[sysimg.precompile]
+execution_file = ["deps/precompile.jl"]
