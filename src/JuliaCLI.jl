@@ -50,7 +50,7 @@ end
 
 
 function runcmd(pkg_cmd; project=envpath())
-    fn = `julia --history-file=no --startup-file=no --project=$(envpath()) -e $(pkg_cmd)`
+    fn = `julia --history-file=no --startup-file=no --project=$(project) -e $(pkg_cmd)`
     @info "running " fn
     run(fn)
 
@@ -118,11 +118,14 @@ parse_args(v::Vararg{Any,1}) = "\"$(v...)\""
 end
 
 
-@cast function precompile(pkgname; use_pkg::Bool = false, p::Bool = false)
+@cast function precomp(pkgname; use_pkg::Bool = false, p::Bool = false)
     use_pkg || p && return pkg("precompile", pkgname)
+    pkg_cmd = "using Pkg; Pkg.precompile($(pkgname))"
+    runcmd(pkg_cmd)
 end
 
-@cast function precompile(; use_pkg::Bool = false, p::Bool = false)
+# TODO: Import pkg and then name precompile
+@cast function precomp(; use_pkg::Bool = false, p::Bool = false)
     use_pkg || p && return pkg("precompile")
     name = replace(basename(resolve_julia_project()), ".jl" => "")
     pkg_cmd = "using $(name)"
