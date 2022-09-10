@@ -48,6 +48,14 @@ function envpath(dirs = [pwd(), joinpath(pwd(), ".."), _defaultenvpath()])
     isempty(dirs) ? resolve_julia_project() : first(dirs)
 end
 
+
+function runcmd(pkg_cmd; project=envpath())
+    fn = `julia --history-file=no --startup-file=no --project=$(envpath()) -e $(pkg_cmd)`
+    @info "running " fn
+    run(fn)
+
+end
+
 """
 Run the `LanguageServerInstance`.  This will also activate the `LSPNeovim` environment.
 By default, this will attempt to determine an appropriate environment, see `envpath`.
@@ -85,6 +93,7 @@ end
     return runserver(; download)
 end
 
+
 # NOTE: Find a better way to handle this
 parse_args(v::Vararg{Any}) = reduce((x, y) -> `$(x), $(y)`, [v...])
 parse_args(v::Vararg{Any,1}) = "\"$(v...)\""
@@ -106,6 +115,18 @@ parse_args(v::Vararg{Any,1}) = "\"$(v...)\""
     end
     @info "running" fn
     run(fn)
+end
+
+
+@cast function precompile(pkgname; use_pkg::Bool = false, p::Bool = false)
+    use_pkg || p && return pkg("precompile", pkgname)
+end
+
+@cast function precompile(; use_pkg::Bool = false, p::Bool = false)
+    use_pkg || p && return pkg("precompile")
+    name = replace(basename(resolve_julia_project()), ".jl" => "")
+    pkg_cmd = "using $(name)"
+    runcmd(pkg_cmd)
 end
 
 @main
