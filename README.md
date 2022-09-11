@@ -76,5 +76,12 @@ juliacli pkg status
 juliacli pkg add JSON
 juliacli pkg add DataStructures
 juliacli pkg status
+
+
+juliacli pc
+juliacli pc --use-pkg
+juliacli pc [PKGNAME]
+juliacli pc [PKGNAME] --use-pkt
+
 ```
 
