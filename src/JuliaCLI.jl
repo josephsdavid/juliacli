@@ -9,19 +9,20 @@ include("resolve_projects.jl")
 include("commands.jl")
 include("lsp.jl")
 
+export server, pkg, pc
 
 
-@cast function server(; download::Bool = false)
+
+@cast function server(; download::Bool=false)
     return runserver(; download)
 end
-
 
 
 @cast function pkg(
     cmd::AbstractString,
     args...;
-    project = envpath(),
-    global_env::Bool = false,
+    project=envpath(),
+    global_env::Bool=false
 )
     # TODO: Figure out kwds
     # args, kwds = map([[args...], [kwds...]]) do param
@@ -43,7 +44,7 @@ end
 
 
 # TODO: use toml to get the name key
-@cast function pc(pkgname = ""; use_pkg::Bool = false)
+@cast function pc(pkgname=""; use_pkg::Bool=false)
     if use_pkg
         statements = ["precompile", pkgname]
         return pkg(filter(x -> !isempty(x), statements)...)

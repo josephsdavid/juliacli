@@ -3,9 +3,10 @@ name = "juliacli"
 [install]
 completion = true
 quiet = false
-optimize = 2
+optimize = 3
+# compile="all"
 
 [sysimg]
 
 [sysimg.precompile]
-execution_file = ["deps/precompile.jl"]
+statements_file = ["deps/statements.jl"]
