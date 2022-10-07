@@ -62,35 +62,24 @@ end
     run(fn)
 end
 
-macro trycatch(expr, msg)
-    try
-        return eval(expr)
-    catch
-        @warn "$(expr) failed to evaluate! $(msg)"
-        return nothing
+
+@cast function test(testset="")
+    if isempty(testset)
+        Pkg.activate(envpath())
+        isempty(testset) && return Pkg.test(envpath())
     end
-end
+    cmd = "using TestEnv; TestEnv.activate(); "
 
-@cast function test(testset="", dir=envpath())
-    Pkg.activate(dir)
-    isempty(testset) && return Pkg.test()
-    cmd = "using TestEnv; TestEnv.activate();"
-
-    @trycatch(f = joinpath(envpath(), "Project.toml"), "Project.toml not found!")
-    isnothing(f) && return
-
-    @trycatch(modname = TOML.parsefile(f)["name"], "Active project does not have a module name!")
-    isnothing(modname) && return
-
+    f = joinpath(envpath(), "Project.toml")
+    modname = TOML.parsefile(f)["name"]
     path = joinpath("test", string(modname, "Tests.jl"))
     if !isfile(path)
         @warn "$(path) not found!"
         return
     end
-
-    cmd = string(cmd, "include(\"$(path)\");")
-    cmd = string(cmd, "retest(\"$(testset)\")")
-    fn = `julia --history-file=no --startup-file=no --project=$(dir) -e $(cmd)`
+    cmd = string(cmd, "include(\"$(path)\"); ")
+    cmd = string(cmd, "using ReTest; retest(\"$(testset)\")")
+    fn = `julia --history-file=no --startup-file=no --project=$(envpath()) -e $(cmd)`
     @info "running" fn
     run(fn)
 end

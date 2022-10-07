@@ -52,16 +52,6 @@ catch
 JuliaCLI.pc(;use_pkg=true)
 end
 try
-JuliaCLI.test()
-catch
-JuliaCLI.test()
-end
-try
-JuliaCLI.test("environment")
-catch
-JuliaCLI.test("environment")
-end
-try
     JuliaCLI.runserver(;download=true)
     JuliaCLI.server(;download=true)
 catch
