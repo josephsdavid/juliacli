@@ -62,6 +62,39 @@ end
     run(fn)
 end
 
+macro trycatch(expr, msg)
+    try
+        return eval(expr)
+    catch
+        @warn "$(expr) failed to evaluate! $(msg)"
+        return nothing
+    end
+end
+
+@cast function test(testset="", dir=envpath())
+    Pkg.activate(dir)
+    isempty(testset) && return Pkg.test()
+    cmd = "using TestEnv; TestEnv.activate();"
+
+    @trycatch(f = joinpath(envpath(), "Project.toml"), "Project.toml not found!")
+    isnothing(f) && return
+
+    @trycatch(modname = TOML.parsefile(f)["name"], "Active project does not have a module name!")
+    isnothing(modname) && return
+
+    path = joinpath("test", string(modname, "Tests.jl"))
+    if !isfile(path)
+        @warn "$(path) not found!"
+        return
+    end
+
+    cmd = string(cmd, "include(\"$(path)\");")
+    cmd = string(cmd, "retest(\"$(testset)\")")
+    fn = `julia --history-file=no --startup-file=no --project=$(dir) -e $(cmd)`
+    @info "running" fn
+    run(fn)
+end
+
 
 # TODO: use toml to get the name key
 @cast function pc(pkgname=""; use_pkg::Bool=false)
