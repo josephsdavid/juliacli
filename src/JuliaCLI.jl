@@ -2,6 +2,7 @@ module JuliaCLI
 
 using Comonicon
 using LanguageServer, SymbolServer
+using Pkg
 using Pkg: depots1
 using TOML
 
@@ -9,9 +10,28 @@ include("resolve_projects.jl")
 include("commands.jl")
 include("lsp.jl")
 
-export server, pkg, pc
 
+for f in [:add, :rm]
+    @eval begin
+        @cast function $(f)(pkg...)
+            Pkg.activate(envpath())
+            Pkg.$(f)(collect(pkg))
+        end
+    end
+end
 
+for f in [:resolve, :update]
+    @eval begin
+        @cast function $(f)()
+            Pkg.activate(envpath())
+            Pkg.$(f)()
+        end
+    end
+end
+
+@cast function activate(dir=envpath())
+    Pkg.activate(dir)
+end
 
 @cast function server(; download::Bool=false)
     return runserver(; download)
@@ -46,8 +66,13 @@ end
 # TODO: use toml to get the name key
 @cast function pc(pkgname=""; use_pkg::Bool=false)
     if use_pkg
-        statements = ["precompile", pkgname]
-        return pkg(filter(x -> !isempty(x), statements)...)
+        if isempty(pkgname)
+            Pkg.activate(envpath())
+            return Pkg.precompile()
+        else
+            Pkg.activate(envpath())
+            return Pkg.precompile(pkgname)
+        end
     end
     # using is in many cases (for modules like flux and plots) much  faster than pkg
     if isempty(pkgname)

@@ -1,16 +1,24 @@
-pc(arg) = @show run(
-    `julia --project=. --startup-file=no --trace-compile=deps/statements/$(arg)_precompile.jl src/JuliaCLI.jl juliacli $(arg)`,
-)
-const args = ["server", :pc, "pkg"]
+import JuliaCLI
+using Pkg
 
-for arg in args
-    @info "precompiling" arg
-    try
-        pc(arg)
-    catch  e
-        @warn "$(arg) failed" e
-    end
+JuliaCLI.activate()
+JuliaCLI.activate(".")
+JuliaCLI.add("Comonicon")
+JuliaCLI.add("LanguageServer", "SymbolServer")
+JuliaCLI.add("FilePathsBase")
+JuliaCLI.rm("FilePathsBase")
+JuliaCLI.update()
+JuliaCLI.resolve()
+JuliaCLI.pc()
+JuliaCLI.pc(;use_pkg=true)
+try
+    JuliaCLI.runserver(;download=true)
+    JuliaCLI.server(;download=true)
+catch
 end
 
-
-
+try
+    JuliaCLI.runserver()
+    JuliaCLI.server()
+catch
+end
