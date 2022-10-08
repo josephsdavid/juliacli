@@ -65,10 +65,10 @@ end
 
 @cast function test(testset="")
     if isempty(testset)
-        Pkg.activate(envpath())
-        isempty(testset) && return Pkg.test(envpath())
+        return pkg("test")
     end
-    cmd = "using TestEnv; TestEnv.activate(); "
+    cmd = "@info \"activating environment at $(joinpath(envpath(), "test"))\"; "
+    cmd *= "using TestEnv; TestEnv.activate(); "
 
     f = joinpath(envpath(), "Project.toml")
     modname = TOML.parsefile(f)["name"]
@@ -77,10 +77,11 @@ end
         @warn "$(path) not found!"
         return
     end
-    cmd = string(cmd, "include(\"$(path)\"); ")
-    cmd = string(cmd, "using ReTest; retest(\"$(testset)\")")
+    cmd *= "@info \"loading tests\"; "
+    cmd *= "include(\"$(path)\"); "
+    cmd *= "@info \"running tests\"; "
+    cmd *= "using ReTest; retest(\"$(testset)\")"
     fn = `julia --history-file=no --startup-file=no --project=$(envpath()) -e $(cmd)`
-    @info "running" fn
     run(fn)
 end
 
