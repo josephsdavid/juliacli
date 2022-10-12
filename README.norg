@@ -1,5 +1,5 @@
-* JuliaCLI: Julia command line utilities 
-  Mostly for personal use. Wraps `Pkg`, `LanguageServer.jl`, and `JuliaFormatter.jl` in a compiled  CLI app.
+* Julia command line utilities 
+  Mostly for personal use. Wraps `Pkg`, `LanguageServer.jl`, `TestEnv`+`ReTest`, and maybe one day JuliaFormatter into a little box you can access through the cli (without waiting on precompilation)
 
 ** Installation
 
@@ -11,7 +11,7 @@
 
 ** Notes
 
-   This is in active development for personal use, some things just dont work
+   This is in active development for personal use, and i am totally new to julia. Use at your own risk (or make an issue and i will listen)
 
 ** Demos
 
