@@ -9,6 +9,10 @@
 
    As long as `~/.julia/bin/` is in your $PATH, everything should be good to go!
 
+** Notes
+
+   This is in active development for personal use, some things just dont work
+
 ** Demos
 
 *** Pkg Wrapper
@@ -28,9 +32,24 @@
     juliacli pkg status
     @end
 
+*** Precompiling
+
+   @code bash 
+   juliacli pc # compiles with "using" 
+   juliacli pc --use-pkg # compiles with pkg.precompile
+   @end
+
+*** Testing
+
+    @code bash 
+    juliacli test # runs pkg.test 
+    # in a retest enabled project, activates test env, loads test module, and retests the argument
+    juliacli test testset-name  
+    @end
+
 *** Easy LSP setup in Neovim
 
-    To set up the LSP to use the wrapped and compiled LanguageServer, try somehting like:
+    To set up the LSP to use the wrapped and compiled LanguageServer, try somehting like the below snippet. This lowers language server start time to a few seconds (from 20-30 seconds), because we dont waste forever precompiling everything
     @code lua
     local nvim_lsp = require"lspconfig"
     local servers = {

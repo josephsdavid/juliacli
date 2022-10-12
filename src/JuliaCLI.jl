@@ -10,29 +10,6 @@ include("resolve_projects.jl")
 include("commands.jl")
 include("lsp.jl")
 
-
-for f in [:add, :rm]
-    @eval begin
-        @cast function $(f)(pkg...)
-            Pkg.activate(envpath())
-            Pkg.$(f)(collect(pkg))
-        end
-    end
-end
-
-for f in [:resolve, :update]
-    @eval begin
-        @cast function $(f)()
-            Pkg.activate(envpath())
-            Pkg.$(f)()
-        end
-    end
-end
-
-@cast function activate(dir=envpath())
-    Pkg.activate(dir)
-end
-
 @cast function server(; download::Bool=false)
     return runserver(; download)
 end

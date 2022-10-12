@@ -1,7 +1,7 @@
 name = "JuliaCLI"
 uuid = "34ef4b07-2dac-42f2-925b-def4c316dd61"
 authors = ["josephsdavid <josephsd@smu.edu>"]
-version = "0.3.4"
+version = "0.3.5"
 
 [deps]
 Comonicon = "863f3e99-da2a-4334-8734-de3dacbe5542"
