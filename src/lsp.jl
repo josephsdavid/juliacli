@@ -18,3 +18,7 @@ function runserver(
     s.runlinter = true
     LanguageServer.run(s)
 end
+
+@cast function server(; download::Bool=false)
+    return runserver(; download)
+end
