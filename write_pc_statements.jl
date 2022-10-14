@@ -14,8 +14,5 @@ catch
     JuliaCLI.pc(; use_pkg=true)
 end
 
-try
-    JuliaCLI.server()
-    JuliaCLI.runserver()
-catch
-end
+JuliaCLI.server()
+JuliaCLI.runserver()
