@@ -1,25 +1,3 @@
-for f in [:add, :rm]
-    @eval begin
-        @cast function $(f)(pkg...)
-            Pkg.activate(envpath())
-            Pkg.$(f)(collect(pkg))
-        end
-    end
-end
-
-for f in [:resolve, :update]
-    @eval begin
-        @cast function $(f)()
-            Pkg.activate(envpath())
-            Pkg.$(f)()
-        end
-    end
-end
-
-@cast function activate(dir=envpath())
-    Pkg.activate(dir)
-end
-
 @cast function pkg(
     cmd::AbstractString,
     args...;
@@ -43,6 +21,15 @@ end
     @info "running" fn
     run(fn)
 end
+
+# function init_test_cmd()
+#
+# end
+# _test(v::Vararg{String, 0}) = pkg("test")
+# function test(v::Vararg{String, 1})
+#
+# end
+# _test(v::Vararg{String, 1}) = pkg("test")
 
 @cast function test(testset="")
     if isempty(testset)

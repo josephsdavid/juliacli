@@ -1,7 +1,8 @@
 module JuliaCLI
 
 using Comonicon
-using LanguageServer, SymbolServer
+using LanguageServer
+import SymbolServer
 using Pkg
 using Pkg: depots1
 using TOML

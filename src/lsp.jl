@@ -19,6 +19,6 @@ function runserver(
     LanguageServer.run(s)
 end
 
-@cast function server(; download::Bool=false)
-    return runserver(; download)
+@cast function server()
+    return runserver()
 end
