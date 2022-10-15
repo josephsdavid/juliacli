@@ -1,7 +1,8 @@
-import JuliaCLI
 using Pkg
-using LanguageServer
+import LanguageServer
 import SymbolServer
+
+import JuliaCLI
 
 try
     JuliaCLI.pc()

@@ -4,9 +4,9 @@ name = "juliacli"
 completion = true
 quiet = false
 optimize = 3
-# compile="all"
+compile="all"
 
-# [sysimg]
-#
-# [sysimg.precompile]
-# statements_file = ["deps/statements.jl"]
+[sysimg]
+
+[sysimg.precompile]
+statements_file = ["deps/statements.jl"]
