@@ -11,7 +11,7 @@ using REPL
 include("resolve_projects.jl")
 include("commands.jl")
 include("lsp.jl")
-include("repl.jl")
+# include("repl.jl") under development
 include("pkg.jl")
 
 @main
