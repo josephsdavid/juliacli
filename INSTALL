@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-rm -rdf deps/statements.jl
-julia --startup-file=no --banner=no --trace-compile=deps/statements.jl write_pc_statements.jl
+#rm -rdf deps/statements.jl
+#julia --startup-file=no --banner=no --trace-compile=deps/statements.jl write_pc_statements.jl
 julia --startup-file=no --banner=no --history-file=no --project=. -e 'using Pkg; Pkg.build(;verbose=true)'
