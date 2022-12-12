@@ -34,7 +34,6 @@ end
 Finds the "nearest" active project, searching first for a manifest directly in
 the current working directory, then searching the rest of the environment.
 """
-function envpath(dirs = [pwd(), joinpath(pwd(), ".."), _defaultenvpath()])
-    dirs = filter(hasmanifest, dirs)
-    isempty(dirs) ? resolve_julia_project() : first(dirs)
+function envpath(dirs = [ pwd(), joinpath(pwd(), ".."), resolve_julia_project(), _defaultenvpath()])
+    return first(filter(hasmanifest, dirs))
 end
