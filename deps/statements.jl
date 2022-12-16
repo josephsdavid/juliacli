@@ -1,6 +1,7 @@
 precompile(Tuple{typeof(Parsers.__init__)})
 precompile(Tuple{typeof(URIs.__init__)})
 precompile(Tuple{typeof(JuliaCLI.pc)})
+precompile(Tuple{typeof(Base.something), String, String, Vararg{String}})
 precompile(Tuple{Base.CoreLogging.var"#handle_message##kw", NamedTuple{(:fn,), Tuple{Base.Cmd}}, typeof(Base.CoreLogging.handle_message), Logging.ConsoleLogger, Base.CoreLogging.LogLevel, String, Module, Symbol, Symbol, String, Int64})
 precompile(Tuple{typeof(Base.iterate), Base.Pairs{Symbol, Base.Cmd, Tuple{Symbol}, NamedTuple{(:fn,), Tuple{Base.Cmd}}}})
 precompile(Tuple{typeof(Logging.showvalue), Base.IOContext{Base.GenericIOBuffer{Array{UInt8, 1}}}, Base.Cmd})
