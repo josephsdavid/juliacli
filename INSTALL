@@ -1,4 +1,31 @@
 #!/usr/bin/env bash
-# rm -rdf deps/statements.jl
+rm -rdf deps/statements.jl
+
+# THANK YOU TO FREDERIK (https://github.com/fredrikekre/.dotfiles/blob/1a6e345f8ff42c42c0869f31bd08ecad968e2b2b/.julia/environments/nvim-lspconfig/Makefile)
+julia --project=. --startup-file=no -e 'using Pkg; Pkg.add(["JSON", "fzf_jll", "Random", "Zlib_jll"])'
+julia --project=. --startup-file=no -e 'using Pkg; Pkg.instantiate()'
+echo "module Example" > src/Example.jl 
+echo "" >> src/Example.jl 
+echo "import JSON" >> src/Example.jl 
+echo "import fzf_jll" >> src/Example.jl 
+echo "using Random" >> src/Example.jl 
+echo "using Zlib_jll" >> src/Example.jl 
+echo "" >> src/Example.jl 
+echo "function hello(who, notused)" >> src/Example.jl 
+echo "    println(\"hello\", who)" >> src/Example.jl 
+echo "    shuffle([1, 2, 3])" >> src/Example.jl 
+echo "    shoffle([1, 2, 3])" >> src/Example.jl 
+echo "    fzzf = fzf_jll.fzzf()" >> src/Example.jl 
+echo "    fzf = fzf_jll.fzf(1)" >> src/Example.jl 
+echo "    JSON.print(stdout, Dict(\"hello\" => [1, 2, 3]), 2, 123)" >> src/Example.jl 
+echo "    JSON.print(stdout, Dict(\"hello\" => [1, 2, 3]))" >> src/Example.jl 
+echo "    hi(who)" >> src/Example.jl 
+echo "    return Zlib_jll.libz" >> src/Example.jl 
+echo "end" >> src/Example.jl 
+echo "" >> src/Example.jl 
+echo "end # module" >> src/Example.jl 
+nvim -nu ./minimal_nvim.lua src/Example.jl 
+julia --project=. --startup-file=no -e 'using Pkg; Pkg.rm(["JSON", "fzf_jll", "Random", "Zlib_jll"])'
+rm src/Example.jl
 # julia --startup-file=no --banner=no --trace-compile=deps/statements.jl write_pc_statements.jl
 julia --startup-file=no --banner=no --history-file=no --project=. -e 'using Pkg; Pkg.build(;verbose=true)'

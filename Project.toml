@@ -1,7 +1,7 @@
 name = "JuliaCLI"
 uuid = "34ef4b07-2dac-42f2-925b-def4c316dd61"
 authors = ["josephsdavid <josephsd@smu.edu>"]
-version = "0.3.6"
+version = "0.4.0"
 
 [deps]
 Comonicon = "863f3e99-da2a-4334-8734-de3dacbe5542"
@@ -12,10 +12,3 @@ Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 SymbolServer = "cf896787-08d5-524d-9de7-132aaa0cb996"
 TOML = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
-
-[compat]
-# Comonicon = "1.0"
-# LanguageServer = "4.3"
-# Revise = "3.4"
-# SymbolServer = "7.2"
-# TOML = "1.0"
