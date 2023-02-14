@@ -28,6 +28,8 @@ end
     add_tests(modname)
 end
 
+@cast bs(modname) = bootstrap(modname)
+
 function get_deps(fname)
     lines = map(readlines(fname)) do line
         !(occursin("import", line) || occursin("using", line)) && return nothing
