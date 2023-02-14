@@ -13,6 +13,7 @@ include("commands.jl")
 include("lsp.jl")
 # include("repl.jl") under development
 include("pkg.jl")
+include("project.jl")
 
 @main
 
