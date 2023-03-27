@@ -8,10 +8,19 @@ using Pkg: depots1
 using TOML
 using REPL
 
+function juliaversioncmd()
+    julia_version = get(ENV, "JULIA_VERSION", nothing)
+    if isnothing(julia_version)
+        return ``
+    else
+        return `+$(julia_version)`
+    end
+end
+
 include("resolve_projects.jl")
 include("commands.jl")
 include("lsp.jl")
-# include("repl.jl") under development
+include("repl.jl")
 include("pkg.jl")
 include("project.jl")
 

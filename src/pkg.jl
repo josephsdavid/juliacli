@@ -14,9 +14,9 @@
         pkg_cmd = "using Pkg; Pkg.$(cmd)()"
     end
     if !global_env
-        fn = `julia --history-file=no --startup-file=no --project=$(project) -e $(pkg_cmd)`
+        fn = `julia $(juliaversioncmd()) --history-file=no --startup-file=no --project=$(project) -e $(pkg_cmd)`
     else
-        fn = `julia --history-file=no --startup-file=no --project=$(Base.load_path_expand("@v#.#")) -e $(pkg_cmd)`
+        fn = `julia $(juliaversioncmd()) --history-file=no --startup-file=no --project=$(Base.load_path_expand("@v#.#")) -e $(pkg_cmd)`
     end
     @info "running" fn
     run(fn)
@@ -49,7 +49,7 @@ end
     cmd *= "include(\"$(path)\"); "
     cmd *= "@info \"running tests\"; "
     cmd *= "using ReTest; retest(\"$(testset)\")"
-    fn = `julia --history-file=no --startup-file=no --project=$(envpath()) -e $(cmd)`
+    fn = `julia $(juliaversioncmd()) --history-file=no --startup-file=no --project=$(envpath()) -e $(cmd)`
     run(fn)
 end
 
